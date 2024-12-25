@@ -3,9 +3,9 @@ import sys
 
 import requests
 
-SESSION_COOKIE = '_ga=GA1.2.753280351.1665026626; session=53616c7465645f5f897532491b5846730bcefac644ecf754b3abe00ef0f51a3940f1036ed3a098994ab7a1bc6ff6e2733fa6f5095defc54093974e782b1a5c63; _gid=GA1.2.620615693.1669905121; _gat=1'
+SESSION_COOKIE = '53616c7465645f5fac5fe4749acb9e8f7f38bdc063cc361bdd8a59d10d4af343cb45d54a231ea941677ccf654331a57591ac41f9e3f46860eef1af89f00ffd29'
 
-URL = "https://adventofcode.com/2022/day/%s/input"
+URL = "https://adventofcode.com/2024/day/%s/input"
 BASE_DIR = os.path.join(os.path.dirname(__file__), "../inputs")
 
 
@@ -51,7 +51,7 @@ def get_day_file(day):
 
 def get_inputs_from_web(day):
     headers = {'Cookie': 'session=%s' % SESSION_COOKIE,
-               'User-Agent': 'github.com/mdowell12/advent-of-code-2022 by mattdowell12@gmail.com'}
+               'User-Agent': 'github.com/mdowell12/advent-of-code-2024 by mattdowell12@gmail.com'}
     resp = requests.get(URL % day, headers=headers)
     resp.raise_for_status()
     return resp.text
