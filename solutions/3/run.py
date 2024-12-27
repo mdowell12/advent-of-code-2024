@@ -4,21 +4,24 @@ from solutions.get_inputs import read_inputs
 def run_1(inputs):
     result = 0
     for line in inputs:
-        result += _process_line(line)
+        add, _ = _process_line(line, True)
+        result += add
     return result
 
 
 def run_2(inputs):
     result = 0
+    is_on = True
     for line in inputs:
-        result += _process_line(line, always_do=False)
+        add, is_on = _process_line(line, is_on, always_do=False)
+        result += add
     return result
 
 
-def _process_line(line, always_do=True):
+def _process_line(line, is_on, always_do=True):
     result = 0
     i = 0
-    is_on = True
+    counts = {'do': 0, 'dont': 0}
     while i < len(line):
         if line[i:i+4] == 'mul(':
             product, end_i = _parse_mul(line, i)
@@ -34,16 +37,14 @@ def _process_line(line, always_do=True):
         elif line[i:i+4] == 'do()':
             is_on = True
             i += 4
-            print(line[i-8:i], line[i:i+8], is_on)
-            # import pdb; pdb.set_trace()
+            counts['do'] += 1
         elif line[i:i+7] == "don't()":
             is_on = False
             i += 7
-            print(line[i-8:i], line[i:i+8], is_on)
-            # import pdb; pdb.set_trace()
+            counts['dont'] += 1
         else:
             i += 1
-    return result
+    return result, is_on
 
 
 def _parse_mul(line, i):
@@ -98,6 +99,4 @@ if __name__ == "__main__":
     print(f"Finished 1 with result {result_1}")
 
     result_2 = run_2(input)
-    # 106762851 too high
-    # 107991598 is too high
     print(f"Finished 2 with result {result_2}")
